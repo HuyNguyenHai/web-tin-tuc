@@ -1,40 +1,42 @@
 {
-    "title": "Budesliga",
-    "imgUrl": "/images/logo/budesliga-logo.png",
-    "createdAt": "1/1/1970"
-}
-{
     "title": "Ligue 1",
     "imgUrl": "/images/logo/c1-logo.png",
+    "link": "tin-Ligue1",
     "createdAt": "1/1/1970"
-}
-{
+  }
+  {
+    "title": "Budesliga",
+    "imgUrl": "/images/logo/budesliga-logo.png",
+    "link": "tin-Budesliga",
+    "createdAt": "1/1/1970"
+  }
+  {
     "title": "La Liga",
-    "imgUrl": "/images/logo/c2-logo.png",
-    "createdAt": "1/1/1970"
-}
-{
-    "title": "England",
     "imgUrl": "/images/logo/laliga-logo.png",
+    "link": "tin-LaLiga",
     "createdAt": "1/1/1970"
-}
-{
-    "title": "Seagame",
-    "imgUrl": "/images/logo/seagame-logo.png",
-    "createdAt": "1/1/1970"
-}
-{
+  }
+  {
     "title": "Europa League",
     "imgUrl": "/images/logo/seria-logo.png",
+    "link": "tin-EuropaLeague",
     "createdAt": "1/1/1970"
-}
-{
+  }
+  {
     "title": "Champion League",
-    "imgUrl": "/images/logo/seria-logo.png",
+    "imgUrl": "/images/logo/ligue-logo.png",
+    "link": "tin-ChampionLeague",
     "createdAt": "1/1/1970"
-}
-{
+  }
+  {
+    "title": "Seagame",
+    "imgUrl": "/images/logo/seagame-logo.png",
+    "link": "tin-Seagame",
+    "createdAt": "1/1/1970"
+  }
+  {
     "title": "Seria A",
     "imgUrl": "/images/logo/vn-logo.png",
+    "link": "tin-SeriaA",
     "createdAt": "1/1/1970"
-}
+  }
