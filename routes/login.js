@@ -1,6 +1,6 @@
 const express = require('express');
 var router = express.Router();
-var User = require("../modules/userAuthentication");
+var User = require("../models/mongooseModels/userAuthentication");
 
 router.get('/',(req,res,next)=>{
 	res.render("login",{ error: 'Hello guys' });

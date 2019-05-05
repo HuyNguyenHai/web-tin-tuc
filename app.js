@@ -12,17 +12,18 @@ var MongoStore = require('connect-mongo')(session);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+var categoryNewsRouter = require('./routes/categoryNews');
 
 //connect Mongodb
 //mongoose.connect('mongodb://localhost/Login-user', { useNewUrlParser: true });
-mongoose.connect('mongodb://localhost/web-tin-tuc', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/web-tin-tuc', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 var db = mongoose.connection;
 
 //handle mongo error
 db.on('error',console.error.bind(console,'connection error: '));
 db.once('open',function(){
-	//We're connected!!!
+	console.log("CONNECTED TO DATABASE")
 })
 
 
@@ -54,6 +55,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/category', categoryNewsRouter);
 app.use('/users', usersRouter);
 app.use('/login',loginRouter);
 
