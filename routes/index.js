@@ -8,7 +8,8 @@ var CarouselNews = require('../models/ejsModels/CarouselNews')
 var CategoryList = require('../models/ejsModels/CategoryList')
 var NewsList = require('../models/ejsModels/NewsList')
 var CategoryNewsList = require('../models/ejsModels/CategoryNewsList')
-var RightNewsList = require('../models/ejsModels/RightNewsList')  
+var RightNewsList = require('../models/ejsModels/RightNewsList') 
+var NewsTags = require('../models/ejsModels/NewsTags')  
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -47,7 +48,8 @@ router.get('/:url', (req, res) => {
         newsContent: news.content,
         bottomNewsList: CategoryNewsList(newsList, false, 0, 6),
         relateNewsList: RightNewsList(newsList),
-        newestNewsList: RightNewsList(newsList)
+        newestNewsList: RightNewsList(newsList),
+        tags: NewsTags(news.tags)
       })
     })
   })
