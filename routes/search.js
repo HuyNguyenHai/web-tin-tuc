@@ -12,18 +12,22 @@ var RightNewsList = require('../models/ejsModels/RightNewsList')
 router.get('/', (req, res) => {
   const query = req.query
   const keyWord = query.key
-  News.find()
+  News.find({tags: { "$regex": keyWord, "$options": "i"}})
   .populate('category')
-  .exec((err, categoryNewsList)=>{
+  .exec((err, searchResult)=>{
     News.find()
     .exec((err, newsList) => {
       res.render('searchResult',{
         keyWord: keyWord,
-        categoryNewsList: CategoryNewsList(categoryNewsList, false, 10),
+        categoryNewsList: CategoryNewsList(searchResult, false, 10),
         newestNewsList: RightNewsList(newsList)
       })
     })
   })
+})
+
+router.post('/', (req, res) => {
+  res.redirect('/search?key='+req.body.keyword)
 })
 
 module.exports = router

@@ -41,21 +41,21 @@
 			<div class="container" style="background-color: #fff; margin-top: 0">
 				<!-- search bar -->
 				<div id="buffer" style="padding:30px">
-					<form class="searchbar" action="/tim-kiem" method="post">
-			          <input name="keyword" class="search_input" type="text"placeholder="Search...">
-			          <a class="search_icon" type="submit"><i class="fas fa-search"></i></a>
-			        </form>
+					<form class="form-inline searchbar" action="/search" method="post" accept-charset="utf-8">
+						<input type="text" class="search_input" name="keyword" placeholder="Tìm kiếm...">
+						<button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+					</form>
 				</div>
 				<!-- search bar end -->
 				<div class="category-container">
 					<div class="category-title" style="font-size: 22px; display:inline;">
-						Tin Kiếm
+						Tìm Kiếm
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-9">
 						<div id="bottom-news-list">
-              <h2>Kết quả tìm kiếm với từ khóa <%=keyWord%></h2> 
+              <h2>Kết quả tìm kiếm với từ khóa "<%=keyWord%>"</h2> 
 							<%-categoryNewsList%>
 						</div>		
 					</div>
