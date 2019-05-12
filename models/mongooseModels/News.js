@@ -1,6 +1,7 @@
 // mongoimport --host cluster0-shard-00-00-5wvnk.mongodb.net:27017 --db web-tin-tuc --collection NewsList --file NewsList.json --authenticationDatabase admin --ssl --username admin --password admin1
 const mongoose = require('mongoose')
-var Category = require('./Category')
+const Category = require('./Category')
+const StringtoTagList = require('stringtoTagList')
 const Schema = mongoose.Schema
 
 var schema = new Schema({
@@ -30,5 +31,9 @@ schema.statics.findByCategoryTitle = function (categoryTitle, callback) {
     })
     return query
 }
+
+// schema.statics.findByTag = function (tag, callback){
+//     return this.find().where()
+// }
 
 module.exports = mongoose.model('News', schema, 'NewsList')

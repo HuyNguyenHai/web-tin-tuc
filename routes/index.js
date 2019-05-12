@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
           res.render('index', { 
             title: 'Tin bóng đá',        
             CategoryList: CategoryList(categories),
-            NewestNewsList: NewsList(newsList, 0, 4),
+            NewestNewsList: NewsList(newsList, 4),
             tinSeagame : CategoryNewsList(categoryNewsList, true),
             carousel: CarouselNews(carouselNewsList)
           })
@@ -35,9 +35,10 @@ router.get('/', function(req, res, next) {
 })
 
 //reading Page
-router.get('/:url', (req, res) => {
+router.get('/tintuc/:url', (req, res) => {
   var newsUrl = '/'+req.params.url
   News.find()
+  .populate('category')
   .exec((err, newsList) => {
     News.findOne({url: newsUrl})
     .populate('category')
@@ -46,11 +47,11 @@ router.get('/:url', (req, res) => {
         title: news.title,
         category: news.category.title,
         newsContent: news.content,
-        bottomNewsList: CategoryNewsList(newsList, false, 0, 6),
+        bottomNewsList: CategoryNewsList(newsList, false, 6),
         relateNewsList: RightNewsList(newsList),
         newestNewsList: RightNewsList(newsList),
         tags: NewsTags(news.tags)
-      })
+      })  
     })
   })
 })

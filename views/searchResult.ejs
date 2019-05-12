@@ -4,7 +4,7 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title><%=title%></title>
+		<title>Tìm kiếm</title>
 
 		<link rel="stylesheet" href="/stylesheets/style.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -41,7 +41,7 @@
 			<div class="container" style="background-color: #fff; margin-top: 0">
 				<!-- search bar -->
 				<div id="buffer" style="padding:30px">
-					<form class="searchbar" action="/search" method="post">
+					<form class="searchbar" action="/tim-kiem" method="post">
 			          <input name="keyword" class="search_input" type="text"placeholder="Search...">
 			          <a class="search_icon" type="submit"><i class="fas fa-search"></i></a>
 			        </form>
@@ -49,44 +49,17 @@
 				<!-- search bar end -->
 				<div class="category-container">
 					<div class="category-title" style="font-size: 22px; display:inline;">
-						Tin <%=category%>
+						Tin Kiếm
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-9">
-						<div class="news-content">
-							<%-newsContent%>
-						</div>
-						<hr>
-						<div class="content-tag" style="margin: 50px 0">
-							<h5>Tags:</h5>
-							<%-tags%>
-						</div>
-						<hr>
-						<!-- <div class="content-comment">
-							<h5>Bình luận</h5>
-							
-						</div> -->
-
-						<div class="category-container"  style="margin-top: 60px;">
-							<div class="category-title" style="font-size: 22px; display:inline;">
-									Có thể bạn quan tâm
-							</div>
-						</div>	
-
 						<div id="bottom-news-list">
-							<%-bottomNewsList%>
+              <h2>Kết quả tìm kiếm với từ khóa <%=keyWord%></h2> 
+							<%-categoryNewsList%>
 						</div>		
 					</div>
 					<div class="col-sm-3">
-						<div class="right-news">
-							<div class="category-title right-news-title">
-								TIN LIÊN QUAN
-							</div>
-							<div class="right-news-list">
-								<%-relateNewsList%>
-							</div>
-						</div>
 						<div class="right-news">
 							<div class="category-title right-news-title">
 								TIN MỚI NHẤT
@@ -100,9 +73,21 @@
 			</div>
 		</div>				
 		<!-- Section 1 end-->
-		<div id="more">
-			<a href="#">Xem toàn bộ</a>
+
+		<!-- Pagination -->
+		<div>
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a href="" class="page-link">Trước</a></li>
+				<li class="page-item"><a href="" class="page-link">1</a></li>
+				<li class="page-item"><a href="" class="page-link">2</a></li>
+				<li class="page-item"><a href="" class="page-link">3</a></li>
+				<li class="page-item"><a href="" class="page-link">4</a></li>
+				<li class="page-item"><a href="" class="page-link">5</a></li>
+				<li class="page-item"><a href="" class="page-link">Sau</a></li>
+			</ul>
 		</div>
+		<!-- Pagination end -->
+
 		<!-- Footer -->
 		<div class="footer" height="300px">
 			<div class="row">

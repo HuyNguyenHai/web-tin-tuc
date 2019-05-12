@@ -1,7 +1,4 @@
-function StringtoTagList(tags) {
-    var str = tags+'';
-    return str.split(',');
-}
+var StringtoTagList = require('stringtoTagList')
 
 var result = (tags) => {
     var res = '<p class="tag-list">'

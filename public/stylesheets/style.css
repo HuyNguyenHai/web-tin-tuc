@@ -458,3 +458,32 @@ li{
 .pagination li a:hover{
   color: #FF1313;
 }
+
+/* Search Bar */
+.searchbar{
+  float: right;
+  width: 320px;
+}
+
+.fa-search{
+   color: #fff; 
+   margin-left: 5px;
+}
+
+.search_icon{
+  background-color: #2BBA2E;
+  padding: 4px 20px;
+  margin: 0;
+  border-radius: 3px;
+}
+
+.search_icon:active{
+  background-color: #4CC64F;
+  padding: 4px 20px;
+  margin: 0;
+  border-radius: 3px;
+}
+
+.search_input{
+  width: 230px;
+}

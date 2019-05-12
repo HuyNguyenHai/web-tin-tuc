@@ -13,14 +13,16 @@ router.get('/:category', (req, res) => {
   var category = req.params.category
   Category.findOne({link: category})
   .exec((err, category) => {
-    var categoryTitle = category.title
-    News.findByCategoryTitle(categoryTitle)
+    var categoryId = category._id
+    News.find({category: categoryId})
+    .populate('category')
     .exec((err, categoryNewsList)=>{
       News.find()
       .exec((err, newsList) => {
+        // res.json({data:categoryNewsList})
         res.render('category',{
-          categoryTitle: categoryTitle,
-          categoryNewsList: CategoryNewsList(categoryNewsList, false, 0, 10),
+          categoryTitle: category.title,
+          categoryNewsList: CategoryNewsList(categoryNewsList, false, 10),
           newestNewsList: RightNewsList(newsList)
         })
       })

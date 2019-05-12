@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var categoryRouter = require('./routes/category');
+var searchRouter = require('./routes/search');
 
 //connect Mongodb
 //mongoose.connect('mongodb://localhost/Login-user', { useNewUrlParser: true });
@@ -59,6 +60,7 @@ app.use('/', indexRouter);
 app.use('/category', categoryRouter);
 app.use('/users', usersRouter);
 app.use('/login',loginRouter);
+app.use('/search',searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
