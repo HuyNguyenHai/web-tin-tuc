@@ -48,8 +48,8 @@ router.get('/tintuc/:url', (req, res) => {
         category: news.category.title,
         newsContent: news.content,
         bottomNewsList: CategoryNewsList(newsList, false, 6),
-        relateNewsList: RightNewsList(newsList),
-        newestNewsList: RightNewsList(newsList),
+        relateNewsList: RightNewsList(newsList, 6),
+        newestNewsList: RightNewsList(newsList, 6),
         tags: NewsTags(news.tags)
       })  
     })

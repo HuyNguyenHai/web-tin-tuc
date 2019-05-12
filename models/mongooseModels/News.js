@@ -1,7 +1,7 @@
 // mongoimport --host cluster0-shard-00-00-5wvnk.mongodb.net:27017 --db web-tin-tuc --collection NewsList --file NewsList.json --authenticationDatabase admin --ssl --username admin --password admin1
-const mongoose = require('mongoose')
-const Category = require('./Category')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Category = require('./Category');
+const Schema = mongoose.Schema;
 
 var schema = new Schema({
     content: {type: String, trim: true, default: ''},
@@ -18,7 +18,7 @@ var schema = new Schema({
     tags: {type: String, trim: true},
     url: {type: String, trim: true, default: '#'},
     views: {type: Number, default: 0}
-})
+});
 
 schema.statics.findByCategoryTitle = function (categoryTitle, callback) {
     var query = this.find();
@@ -26,9 +26,9 @@ schema.statics.findByCategoryTitle = function (categoryTitle, callback) {
     Category.findOne({title: categoryTitle}, (err, category) => {
         query.where(
             {category: category._id}
-        ).exec(callback)
-    })
-    return query
+        ).exec(callback);
+    });
+    return query;
 }
 
-module.exports = mongoose.model('News', schema, 'NewsList')
+module.exports = mongoose.model('News', schema, 'NewsList1');

@@ -3,7 +3,7 @@ var Category = require('../mongooseModels/Category')
 var result = (newsList, inIndexPage, count) => {
 	let start = newsList.length - 1;
 	let end = (start + 1 - count < 0) ? 0 : start + 1 - count;
-	if(start < 0) {return "<h2>Không có tin tức nào được tìm thấy</h2>";}
+	if(start < 0) {return "<h5>Không có tin tức nào được tìm thấy</h5>";}
 	else{
 		var res = '';	
 		if(inIndexPage){
@@ -35,6 +35,8 @@ var result = (newsList, inIndexPage, count) => {
 					}
 			res += '</div>';
 		}else{
+			res += '<h5>Có '+ (start+1) +' kết quả được tìm thấy</h5>';
+			res += '<div id="bottom-news-list">';
 			for(var i=start; i >= end; --i){
 				res += '<article class="bottom-news">';
 				res += '<a href=' +"/tintuc"+  newsList[i].url + ' class="bottom-news-img">';
@@ -48,6 +50,7 @@ var result = (newsList, inIndexPage, count) => {
 				res += '<p class="desc">'+ newsList[i].description;
 				res += '</p></div></article>';
 			}
+			res += '</div>';
 		}
 		return res;
 	}

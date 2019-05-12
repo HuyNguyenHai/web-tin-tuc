@@ -1,16 +1,16 @@
-var express = require('express')
+var express = require('express');
 
-var router = express.Router()
+var router = express.Router();
 //mongoose models
-var News = require('../models/mongooseModels/News')
-var Category = require('../models/mongooseModels/Category')
+var News = require('../models/mongooseModels/News');
+var Category = require('../models/mongooseModels/Category');
 //ejs models
-var CategoryNewsList = require('../models/ejsModels/CategoryNewsList')
-var RightNewsList = require('../models/ejsModels/RightNewsList')
+var CategoryNewsList = require('../models/ejsModels/CategoryNewsList');
+var RightNewsList = require('../models/ejsModels/RightNewsList');
 
 /* GET home page. */
 router.get('/:category', (req, res) => {
-  var category = req.params.category
+  var category = req.params.category;
   Category.findOne({link: category})
   .exec((err, category) => {
     var categoryId = category._id
@@ -23,12 +23,12 @@ router.get('/:category', (req, res) => {
         res.render('category',{
           categoryTitle: category.title,
           categoryNewsList: CategoryNewsList(categoryNewsList, false, 10),
-          newestNewsList: RightNewsList(newsList)
+          newestNewsList: RightNewsList(newsList, 6)
         })
       })
     })
   })
 })
 
-module.exports = router
+module.exports = router;
 

@@ -7,7 +7,7 @@ var UserSchema = new mongoose.Schema({
 	password:{
 		type:String
 	}
-})
+});
 
 //authenticate input against database
 UserSchema.statics.authenticate =(username,password,callback)=>{
