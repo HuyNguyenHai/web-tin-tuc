@@ -15,7 +15,7 @@ var result = (newsList, start, count, isInSearchPage) => {
 			res += '<img src=' + newsList[i].thumb +' alt="tin seagame">';
 			res += '</a>';
 			res += '<div class="bottom-news-text">';
-			res += '<a href=' + "/category/" + newsList[i].category.link + ' class="bottom-news-category"><p>Tin ' + newsList[i].category.title +'</p></a>';
+			res += '<a href=' + "/category/" + newsList[i].category.link + "/trang-1" + ' class="bottom-news-category"><p>Tin ' + newsList[i].category.title +'</p></a>';
 			res += '<a href=' +"/tintuc"+  newsList[i].url + ' class="bottom-news-title"><p>'
 			+ newsList[i].title +'</p></a>';
 			res += '<time class="post-time">' + newsList[i].createdAt +'</time>';

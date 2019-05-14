@@ -44,7 +44,7 @@ router.get('/tintuc/:url', async (req, res) => {
     title: news.title,
     category: news.category.title,
     newsContent: news.content,
-    bottomNewsList: CategoryNewsList(newsList, 6),
+    bottomNewsList: CategoryNewsList(newsList,newsList.length-1, 6),
     relateNewsList: RightNewsList(newsList, 6),
     newestNewsList: RightNewsList(newsList, 6),
     tags: NewsTags(news.tags)

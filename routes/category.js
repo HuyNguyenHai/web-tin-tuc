@@ -9,14 +9,20 @@ var CategoryNewsList = require('../models/ejsModels/CategoryNewsList');
 var RightNewsList = require('../models/ejsModels/RightNewsList');
 var Pagination = require('../models/ejsModels/Pagination');
 
-router.get('/tin-tuc-moi-nhat', (req, res) => {
+router.get('/tin-tuc-moi-nhat/trang-:page', (req, res) => {
+  var pageNow = parseInt(req.params.page);
+
   News.find()
     .populate('category')
     .exec((err, newsList) => {
+      var numberOfNews = 10;//Number of News in a page
+      var start = newsList.length - numberOfNews * (pageNow - 1) - 1;
+      var numberOfPages = parseInt(newsList.length / numberOfNews) + 1;
       res.render('category', {
         categoryTitle: 'tức mới nhất',
-        categoryNewsList: CategoryNewsList(newsList, 10),
-        newestNewsList: ''
+        categoryNewsList: CategoryNewsList(newsList, start, numberOfNews),
+        newestNewsList: '',
+        pagination: Pagination(numberOfPages, pageNow)
       })
     })
 })

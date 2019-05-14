@@ -13,7 +13,7 @@ var result = (category) => {
 			res += '<div class="category-title" style="font-size: 22px; display:inline;">Tin '
 			res += category[j][0].category.title;
 			res += '</div>';
-			res += '<a href= "/category/' + category[j][0].category.link + '">  >Xem toàn bộ</a></li>';
+			res += '<a href= "/category/' + category[j][0].category.link + '/trang-1">  >Xem toàn bộ</a></li>';
 			res += '</div>';
 			res += '<br></div><div class="row">';
 			res += '<div class="col-lg-7 summary-highlight-news">';
