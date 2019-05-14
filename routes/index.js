@@ -8,51 +8,46 @@ var CarouselNews = require('../models/ejsModels/CarouselNews')
 var CategoryList = require('../models/ejsModels/CategoryList')
 var NewsList = require('../models/ejsModels/NewsList')
 var CategoryNewsList = require('../models/ejsModels/CategoryNewsList')
-var RightNewsList = require('../models/ejsModels/RightNewsList') 
-var NewsTags = require('../models/ejsModels/NewsTags')  
+var IndexCategoryNewsList = require('../models/ejsModels/IndexCategoryNewsList')
+var RightNewsList = require('../models/ejsModels/RightNewsList')
+var NewsTags = require('../models/ejsModels/NewsTags')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  Category.find()
-  .exec((err, categories) => {
-    News.find()
-    .exec((err, newsList) => {
-      News.find({isCarouselNews: true})
-      .exec((err, carouselNewsList) => {
-        News.findByCategoryTitle('Seagame')
-        .exec((err, categoryNewsList) => {
-          res.render('index', { 
-            title: 'Tin bóng đá',        
-            CategoryList: CategoryList(categories),
-            NewestNewsList: NewsList(newsList, 4),
-            tinSeagame : CategoryNewsList(categoryNewsList, true),
-            carousel: CarouselNews(carouselNewsList)
-          })
-        })  
-      })
-    })
+router.get('/', async (req, res, next) => {
+  var [newsList, carouselNewsList, categories] = await Promise.all([
+    News.find(),
+    News.find({ isCarouselNews: true }),
+    Category.find()
+  ]);
+  var categoryPromise = [];
+  for (var i = 0; i < categories.length; i++) {
+    categoryPromise[i] = News.getNewsByCategoryId(categories[i]._id);
+  }
+  var newsCategoryList = await Promise.all(categoryPromise);
+  res.render('index', {
+    title: 'Tin bóng đá',
+    CategoryList: CategoryList(categories),
+    NewestNewsList: NewsList(newsList, 4),
+    IndexCategoryNewsList: IndexCategoryNewsList(newsCategoryList),
+    carousel: CarouselNews(carouselNewsList)
   })
 })
 
 //reading Page
-router.get('/tintuc/:url', (req, res) => {
-  var newsUrl = '/'+req.params.url
-  News.find()
-  .populate('category')
-  .exec((err, newsList) => {
-    News.findOne({url: newsUrl})
-    .populate('category')
-    .exec((err, news) => {
-      res.render('readPage',{
-        title: news.title,
-        category: news.category.title,
-        newsContent: news.content,
-        bottomNewsList: CategoryNewsList(newsList, false, 6),
-        relateNewsList: RightNewsList(newsList, 6),
-        newestNewsList: RightNewsList(newsList, 6),
-        tags: NewsTags(news.tags)
-      })  
-    })
+router.get('/tintuc/:url', async (req, res) => {
+  var newsUrl = '/' + req.params.url
+  var [newsList, news] = await Promise.all([
+    News.find().populate('category'),
+    News.findOne({ url: newsUrl }).populate('category')
+  ]);
+  res.render('readPage', {
+    title: news.title,
+    category: news.category.title,
+    newsContent: news.content,
+    bottomNewsList: CategoryNewsList(newsList, 6),
+    relateNewsList: RightNewsList(newsList, 6),
+    newestNewsList: RightNewsList(newsList, 6),
+    tags: NewsTags(news.tags)
   })
 })
 

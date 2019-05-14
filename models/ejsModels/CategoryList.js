@@ -6,7 +6,7 @@ var result = (categories) => {
             res += '<li><span style="z-index:1000">';
             res += categories[i].title;
             res += '</span>';
-            res += '<a href= "/category/' + categories[i].link + '"><img src=' + categories[i].imgUrl +'></a></li>';
+            res += '<a href= "/category/' + categories[i].link + '/trang-1"><img src=' + categories[i].imgUrl +'></a></li>';
         }
         return res;
     }

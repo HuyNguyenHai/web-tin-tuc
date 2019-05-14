@@ -8,26 +8,24 @@ var Category = require('../models/mongooseModels/Category')
 var CategoryNewsList = require('../models/ejsModels/CategoryNewsList')
 var RightNewsList = require('../models/ejsModels/RightNewsList');
 
-/* GET home page. */
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
   const query = req.query;
   const keyWord = query.key;
-  News.find({tags: { "$regex": keyWord, "$options": "i"}})
-  .populate('category')
-  .exec((err, searchResult)=>{
+
+  var [searchResult, newsList] = await Promise.all([
+    News.find({ tags: { "$regex": keyWord, "$options": "i" } }).populate('category'),
     News.find()
-    .exec((err, newsList) => {
-      res.render('searchResult',{
-        keyWord: keyWord,
-        categoryNewsList: CategoryNewsList(searchResult, false, 10),
-        newestNewsList: RightNewsList(newsList, 8)
-      })
-    })
+  ])
+  var start = searchResult.length-1;
+  res.render('searchResult', {
+    keyWord: keyWord,
+    categoryNewsList: CategoryNewsList(searchResult, start, start+1, true),
+    newestNewsList: RightNewsList(newsList, 8)
   })
 })
 
 router.post('/', (req, res) => {
-  res.redirect('/search?key='+req.body.keyword);
+  res.redirect('/search?key=' + req.body.keyword);
 })
 
 module.exports = router;

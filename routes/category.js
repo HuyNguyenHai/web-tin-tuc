@@ -7,26 +7,38 @@ var Category = require('../models/mongooseModels/Category');
 //ejs models
 var CategoryNewsList = require('../models/ejsModels/CategoryNewsList');
 var RightNewsList = require('../models/ejsModels/RightNewsList');
+var Pagination = require('../models/ejsModels/Pagination');
 
-/* GET home page. */
-router.get('/:category', (req, res) => {
-  var category = req.params.category;
-  Category.findOne({link: category})
-  .exec((err, category) => {
-    var categoryId = category._id
-    News.find({category: categoryId})
+router.get('/tin-tuc-moi-nhat', (req, res) => {
+  News.find()
     .populate('category')
-    .exec((err, categoryNewsList)=>{
-      News.find()
-      .exec((err, newsList) => {
-        // res.json({data:categoryNewsList})
-        res.render('category',{
-          categoryTitle: category.title,
-          categoryNewsList: CategoryNewsList(categoryNewsList, false, 10),
-          newestNewsList: RightNewsList(newsList, 6)
-        })
+    .exec((err, newsList) => {
+      res.render('category', {
+        categoryTitle: 'tức mới nhất',
+        categoryNewsList: CategoryNewsList(newsList, 10),
+        newestNewsList: ''
       })
     })
+})
+
+router.get('/:category/trang-:page', (req, res) => {
+  var categoryLink = req.params.category;
+  var pageNow = parseInt(req.params.page);
+
+  News.findByCategoryLink(categoryLink, (err, categoryNewsList) => {
+    News.find()
+      .exec((err, newsList) => {
+        var numberOfNews = 10;//Number of News in a page
+        var start = categoryNewsList.length - numberOfNews * (pageNow - 1) - 1;
+        var numberOfPages = parseInt(categoryNewsList.length / numberOfNews) + 1;
+        if (start < 0) res.send('đéo có trang này');
+        res.render('category', {
+          categoryTitle: categoryNewsList[0].category.title,
+          categoryNewsList: CategoryNewsList(categoryNewsList, start, numberOfNews),
+          newestNewsList: RightNewsList(newsList, 6),
+          pagination: Pagination(numberOfPages, pageNow)
+        })
+      })
   })
 })
 
