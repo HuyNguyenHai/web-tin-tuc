@@ -46,4 +46,4 @@ schema.statics.getNewsByCategoryId = async function(categoryId) {
     return await this.find({ category: categoryId }).populate('category');
 }
 
-module.exports = mongoose.model('News', schema, 'NewsList');
+module.exports = mongoose.model('News', schema, 'NewsList1');
